@@ -538,7 +538,6 @@ require('lazy').setup {
         ansiblels = {},
         powershell_es = {},
         bashls = {},
-        lua_ls = {},
         terraformls = {},
         
         
