@@ -11,19 +11,16 @@ curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze
 curl -sSL -O https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
 dpkg -i ./packages-microsoft-prod.deb
 apt update
-apt-get install nala -y
 VIRTUALIZATION=$(lscpu | grep Virtualization)
-APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim cosmic-session remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable"
+APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim cosmic-session remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable nala"
 if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	APTINSTALLLIST+=" quickemu virtualbox"
 	IFVIRTUALIZATION=true
 fi
+$(apt install $APTINSTALLLIST -y)
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome-stable_current_amd64.deb
 #echo "Chrome installed"
-nala fetch --auto
-nala update
-$(nala install --update $APTINSTALLLIST -y)
 VERSION=$(curl https://go.dev/dl/?mode=json | jq -r '.[0].version')
 VERSION+=".linux-amd64.tar.gz"
 $(wget https://go.dev/dl/$VERSION)
