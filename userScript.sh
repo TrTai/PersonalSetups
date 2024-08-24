@@ -12,3 +12,6 @@ fi
 #python3 -m pip install --user --upgrade pynvim
 pip install pynvim
 git clone https://github.com/TrTai/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
