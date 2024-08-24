@@ -13,32 +13,30 @@ dpkg -i ./packages-microsoft-prod.deb
 apt update
 apt-get install nala -y
 VIRTUALIZATION=$(lscpu | grep Virtualization)
-APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim cosmic-session remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp"
+APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim cosmic-session remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable"
 if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	APTINSTALLLIST+=" quickemu virtualbox"
 	IFVIRTUALIZATION=true
 fi
-if [[ $IFVIRTUALIZATION = true]]; then
-	echo "Virtualization enabled"
-fi
 VERSION=$(curl https://go.dev/dl/?mode=json | jq -r '.[0].version')
 VERSION+=".linux-amd64.tar.gz"
-$(wget https://go.dev/dl$VERSION)
+$(wget https://go.dev/dl/$VERSION)
 $(rm -rf /usr/local/go && tar -C /usr/local -xzf $VERSION)
-echo "GOLANG installed"
+#echo "GOLANG installed"
 echo 'export PATH="$PATH":/usr/local/go/bin' >> ~/.bashrc
-echo "GOLANG added to PATH"
+#echo "GOLANG added to PATH"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome-stable_current_amd64.deb
-echo "Chrome installed"
+#echo "Chrome installed"
 bash <(curl -sL https://github.com/xpipe-io/xpipe/raw/master/get-xpipe.sh)
-git clone https://github.com/TrTai/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-echo "nvim config updated"
+#echo "nvim config updated"
 nala fetch --auto --fetches 5
+nala update
 $(nala install $APTINSTALLLIST -y)
 wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
-echo "installed pip" 
-python3 -m ensurepip --upgrade
+#echo "installed pip" 
+#python3 -m ensurepip --upgrade
 python3 -m pip install --user --upgrade pynvim
+git clone https://github.com/TrTai/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
