@@ -1,6 +1,6 @@
 #!/bin/bash
-if [[ $(echo $PATH) =~ "/usr/local/go/bin" ]]; then
-	echo 'export PATH="$PATH":/usr/local/go/bin' >> ~/.bashrc
+if [[ $PATH =~ "/usr/local/go/bin:" ]]; then
+	echo 'export PATH="$PATH":/usr/local/go/bin:' >> ~/.bashrc
 	echo "GOLANG added to PATH"
 fi
 if ! rustup --version ;then
