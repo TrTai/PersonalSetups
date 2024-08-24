@@ -22,7 +22,7 @@ if [ ! -f /etc/apt/sources.list.d/Floorp.list ]; then
 fi
 apt-get update
 VIRTUALIZATION=$(lscpu | grep Virtualization)
-APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim cosmic-session remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable nala"
+APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim cosmic-session remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable nala python3-venv python3-pip"
 if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	APTINSTALLLIST+=" quickemu virtualbox"
 	IFVIRTUALIZATION=true
