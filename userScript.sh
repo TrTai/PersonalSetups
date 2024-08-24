@@ -3,7 +3,7 @@ if [[ $(echo $PATH) =~ "/usr/local/bin/go/bin" ]]; then
 	echo 'export PATH="$PATH":/usr/local/go/bin' >> ~/.bashrc
 	echo "GOLANG added to PATH"
 fi
-if [[ $(rustup --version) =~ "not found" ]];then
+if ! rustup --version ;then
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 if [[ ! $(apt list --installed | grep xpipe) =~ "xpipe" ]];then
