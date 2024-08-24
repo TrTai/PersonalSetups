@@ -22,7 +22,7 @@ if [ ! -f /etc/apt/sources.list.d/Floorp.list ]; then
 fi
 apt-get update
 VIRTUALIZATION=$(lscpu | grep Virtualization)
-APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim cosmic-session remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable nala python3-venv python3-pip"
+APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim cosmic-session remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable nala python3-venv python3-pip google-chrome-stable code"
 if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	APTINSTALLLIST+=" quickemu virtualbox"
 	IFVIRTUALIZATION=true
@@ -33,15 +33,11 @@ if [ -f /etc/apt/sources.list.d/microsoft-edge.list ] && [ -f /etc/apt/sources.l
 	echo "Removed script added source microsoft-edge-beta.list after initial install completes"
 fi
 APTINSTALLED=$(apt list --installed)
-if [[ ! $APTINSTALLED =~ "google-chrome" ]]; then
-	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-	apt install ./google-chrome-stable_current_amd64.deb
-	echo "Chrome installed"
-fi
 if [[ ! $APTINSTALLED =~ "packages-microsoft.prod" ]]; then
 	curl -sSL -O https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
 	dpkg -i ./packages-microsoft-prod.deb
 	echo "Microsoft ppa installed"
+	rm ./packages-microsoft-prod.deb
 fi
 VERSION=$(curl https://go.dev/dl/?mode=json | jq -r '.[0].version')
 if [[ ! $(go version) =~ $VERSION ]]; then
@@ -49,5 +45,6 @@ if [[ ! $(go version) =~ $VERSION ]]; then
 	$(wget https://go.dev/dl/$VERSION)
 	$(rm -rf /usr/local/go && tar -C /usr/local -xzf $VERSION)
 	echo "GOLANG installed"
+	$(rm ./$VERSION)
 fi
 
