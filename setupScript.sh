@@ -21,8 +21,8 @@ fi
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome-stable_current_amd64.deb
 #echo "Chrome installed"
-bash <(curl -sL https://github.com/xpipe-io/xpipe/raw/master/get-xpipe.sh)
 nala fetch --auto --fetches 5
 nala update
 $(nala install $APTINSTALLLIST -y)
+bash <(curl -sL https://github.com/xpipe-io/xpipe/raw/master/get-xpipe.sh)
 
