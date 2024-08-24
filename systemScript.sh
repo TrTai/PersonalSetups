@@ -27,9 +27,10 @@ if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	APTINSTALLLIST+=" quickemu virtualbox"
 	IFVIRTUALIZATION=true
 fi
-$(apt-get install $APTINSTALLLIST -y >> ./systemScript-apt-log.log)
+$(apt-get --quiet=0 install $APTINSTALLLIST -y | less)
 APTINSTALLED=$(apt list --installed)
 if [[ ! $APTINSTALLED =~ "google-chrome" ]]; then
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	apt install ./google-chrome-stable_current_amd64.deb
 	echo "Chrome installed"
 fi
