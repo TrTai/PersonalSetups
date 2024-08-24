@@ -28,7 +28,7 @@ if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	IFVIRTUALIZATION=true
 fi
 $(apt-get --quiet=0 install $APTINSTALLLIST -y >> /dev/tty)
-if [ -f /etc/apt/sources.list.d/microsoft-edge-list ] && [ -f /etc/apt/sources.list.d/microsoft-edge-beta.list ]; then
+if [ -f /etc/apt/sources.list.d/microsoft-edge.list ] && [ -f /etc/apt/sources.list.d/microsoft-edge-beta.list ]; then
 	rm /etc/apt/sources.list.d/microsoft-edge-beta.list
 	echo "Removed script added source microsoft-edge-beta.list after initial install completes"
 fi
