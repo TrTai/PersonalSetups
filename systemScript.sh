@@ -28,7 +28,7 @@ if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	IFVIRTUALIZATION=true
 fi
 $(apt-get install $APTINSTALLLIST -y)
-if [! $(apt list --installed) =~ "google-chrome" ]; then
+if [ ! $(apt list --installed) =~ "google-chrome" ]; then
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	apt install ./google-chrome-stable_current_amd64.deb
 	echo "Chrome installed"
