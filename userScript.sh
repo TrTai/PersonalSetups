@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ $PATH =~ "/usr/local/go/bin:" ]]; then
+if [[ ! $PATH =~ "/usr/local/go/bin:" ]]; then
 	echo 'export PATH="$PATH":/usr/local/go/bin:' >> ~/.bashrc
 	echo "GOLANG added to PATH"
 fi
