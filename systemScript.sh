@@ -28,12 +28,12 @@ if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	IFVIRTUALIZATION=true
 fi
 $(apt-get install $APTINSTALLLIST -y)
-if [ ! $(apt list --installed) =~ "google-chrome" ]; then
+if [ ! $(apt list --installed | grep google) =~ "google-chrome" ]; then
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	apt install ./google-chrome-stable_current_amd64.deb
 	echo "Chrome installed"
 fi
-if [ ! $(apt list --installed) =~ "packages-microsoft.prod" ]; then
+if [ ! $(apt list --installed | grep microsoft) =~ "packages-microsoft.prod" ]; then
 	curl -sSL -O https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
 	dpkg -i ./packages-microsoft-prod.deb
 	echo "Microsoft ppa installed"
