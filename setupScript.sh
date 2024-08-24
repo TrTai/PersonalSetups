@@ -25,4 +25,9 @@ nala fetch --auto --fetches 5
 nala update
 $(nala install $APTINSTALLLIST -y)
 bash <(curl -sL https://github.com/xpipe-io/xpipe/raw/master/get-xpipe.sh)
+VERSION=$(curl https://go.dev/dl/?mode=json | jq -r '.[0].version')
+VERSION+=".linux-amd64.tar.gz"
+$(wget https://go.dev/dl/$VERSION)
+$(rm -rf /usr/local/go && tar -C /usr/local -xzf $VERSION)
+#echo "GOLANG installed"
 
