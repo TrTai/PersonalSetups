@@ -28,7 +28,7 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome-stable_current_amd64.deb
 bash <(curl -sL https://github.com/xpipe-io/xpipe/raw/master/get-xpipe.sh)
 git clone https://github.com/TrTai/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-$(nala install $APTINSTALLLIST -y
+$(nala install $APTINSTALLLIST -y)
 python3 -m ensurepip --upgrade
 python3 -m pip install --user --upgrade pynvim
 
