@@ -1,9 +1,4 @@
 #!/bin/bash
-VERSION=$(curl https://go.dev/dl/?mode=json | jq -r '.[0].version')
-VERSION+=".linux-amd64.tar.gz"
-$(wget https://go.dev/dl/$VERSION)
-$(rm -rf /usr/local/go && tar -C /usr/local -xzf $VERSION)
-#echo "GOLANG installed"
 echo 'export PATH="$PATH":/usr/local/go/bin' >> ~/.bashrc
 #echo "GOLANG added to PATH"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
