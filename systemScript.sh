@@ -21,7 +21,7 @@ fi
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome-stable_current_amd64.deb
 #echo "Chrome installed"
-nala fetch --auto --fetches 5
+nala fetch --auto
 nala update
 $(nala install $APTINSTALLLIST -y)
 VERSION=$(curl https://go.dev/dl/?mode=json | jq -r '.[0].version')
