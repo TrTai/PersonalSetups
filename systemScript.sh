@@ -1,5 +1,5 @@
 #!/bin/bash
-sed -i 's/WaylandEnable=false/WaylandEnable=true/g' /etc/gdm3/custom.conf
+#sed -i 's/WaylandEnable=false/WaylandEnable=true/g' /etc/gdm3/custom.conf
 IFVIRTUALIZATION=false
 add-apt-repository ppa:neovim-ppa/unstable -y
 add-apt-repository ppa:flexiondotorg/quickemu -y
@@ -22,7 +22,7 @@ if [ ! -f /etc/apt/sources.list.d/Floorp.list ]; then
 fi
 apt-get update
 VIRTUALIZATION=$(lscpu | grep Virtualization)
-APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim cosmic-session remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable nala python3-venv python3-pip google-chrome-stable code"
+APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable nala python3-venv python3-pip google-chrome-stable code"
 if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	APTINSTALLLIST+=" quickemu virtualbox"
 	IFVIRTUALIZATION=true
@@ -34,7 +34,7 @@ if [ -f /etc/apt/sources.list.d/microsoft-edge.list ] && [ -f /etc/apt/sources.l
 fi
 APTINSTALLED=$(apt list --installed)
 if [[ ! $APTINSTALLED =~ "packages-microsoft.prod" ]]; then
-	curl -sSL -O https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
+	curl -sSL -O https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb
 	dpkg -i ./packages-microsoft-prod.deb
 	echo "Microsoft ppa installed"
 	rm ./packages-microsoft-prod.deb
