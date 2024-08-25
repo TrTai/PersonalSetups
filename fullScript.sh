@@ -31,7 +31,7 @@ if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
 fi
 sudo apt-get update
 VIRTUALIZATION=$(lscpu | grep Virtualization)
-APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip ubuntu-restricted-extras neovim remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev chromium-browser floorp microsoft-edge-stable google-chrome-stable nala python3-venv python3-pip code kitty docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin distrobox ffmpeg gimp obs-studio audacity handbrake vlc wireshark tshark"
+APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip ubuntu-restricted-extras neovim remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev chromium-browser floorp microsoft-edge-stable google-chrome-stable nala python3-venv python3-pip python3-pynvim code kitty docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin distrobox ffmpeg gimp obs-studio audacity handbrake vlc wireshark tshark"
 if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	APTINSTALLLIST+=" qemu-system quickemu virtualbox"
 	IFVIRTUALIZATION=true
@@ -68,16 +68,13 @@ fi
 if [[ ! $(apt list --installed | grep xpipe) =~ "xpipe" ]];then
 	bash <(curl -sL https://github.com/xpipe-io/xpipe/raw/master/get-xpipe.sh)
 fi
-#python3 -m pip install --user --upgrade pynvim
-pip install pynvim
 git clone https://github.com/TrTai/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
-#curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-echo "run 'nvm install ##' to complete node install"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 flatpak install flathub md.obsidian.Obsidian com.jgraph.drawio.desktop -y
 curl -f https://zed.dev/install.sh | sh
 echo 'export PATH=$PATH:$HOME/.local/bin:' >> ~/.bashrc
-source ~/.bashrc
 nvm install 20
