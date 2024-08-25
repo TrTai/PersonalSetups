@@ -10,7 +10,7 @@ if [ ! -f /usr/share/keyrings/microsoft.gpg ]; then
 	echo "add Microsoft key"
 fi
 if [ ! -f /etc/apt/sources.list.d/microsoft-edge-beta.list ]; then
-	sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-beta.list
+	echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee -a /etc/apt/sources.list.d/microsoft-edge-beta.list > /dev/null
 	echo "Added Microsoft Edge apt Source"
 fi
 if [ ! -f /usr/share/keyrings/Floorp.gpg ]; then
@@ -26,7 +26,7 @@ if [ ! -f /etc/apt/keyrings/docker.asc ]; then
 	echo "Added Docker keyring"
 fi
 if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
-	sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+	sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 	echo "Added Docker apt source"
 fi
 sudo apt-get update
@@ -76,4 +76,6 @@ git clone https://github.com/TrTai/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 echo "run 'nvm install ##' to complete node install"
-bash -c "nvm install 20"
+export NVM_DIR="$HOME/.nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm install 20
