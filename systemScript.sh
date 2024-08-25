@@ -1,6 +1,7 @@
 #!/bin/bash
 #sed -i 's/WaylandEnable=false/WaylandEnable=true/g' /etc/gdm3/custom.conf
 IFVIRTUALIZATION=false
+apt update
 add-apt-repository ppa:neovim-ppa/unstable -y
 add-apt-repository ppa:flexiondotorg/quickemu -y
 if [ ! -f /usr/share/keyrings/microsoft.gpg ]; then
@@ -20,9 +21,15 @@ if [ ! -f /etc/apt/sources.list.d/Floorp.list ]; then
 	curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze.one/Floorp.list'
 	echo "Added Floorp Source"
 fi
+if [ ! -f /etc/apt/keyrings/docker.asc ]; then
+	curl -fsSl https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+fi
+if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
+	echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+fi
 apt-get update
 VIRTUALIZATION=$(lscpu | grep Virtualization)
-APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable nala python3-venv python3-pip google-chrome-stable code"
+APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip neovim remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev floorp microsoft-edge-stable nala python3-venv python3-pip google-chrome-stable code kitty docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin distrobox"
 if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	APTINSTALLLIST+=" quickemu virtualbox"
 	IFVIRTUALIZATION=true
