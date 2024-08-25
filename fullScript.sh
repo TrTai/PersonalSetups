@@ -70,7 +70,7 @@ if [[ ! $(apt list --installed | grep xpipe) =~ "xpipe" ]];then
 fi
 git clone https://github.com/TrTai/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 mkdir ~/.config/tmux
-echo -e "set -g mouse\nset-windows-option -g mode-keys vi\nset-option -g focus-events on\nset-option -sg escape-time 10" >> ~/.config/tmux/tmux.conf
+echo -e "set -g mouse\nset-window-option -g mode-keys vi\nset-option -g focus-events on\nset-option -sg escape-time 10" >> ~/.config/tmux/tmux.conf
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
