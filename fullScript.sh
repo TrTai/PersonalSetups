@@ -60,7 +60,6 @@ fi
 #!/bin/bash
 if [[ ! $PATH =~ "/usr/local/go/bin:" ]]; then
 	echo 'export PATH="$PATH":/usr/local/go/bin:' >> ~/.bashrc
-	export $PATH="$PATH":/usr/local/go/bin:
 	echo "GOLANG added to PATH"
 fi
 if ! rustup --version ;then
@@ -80,5 +79,3 @@ flatpak install flathub md.obsidian.Obsidian com.jgraph.drawio.desktop -y
 curl -f https://zed.dev/install.sh | sh
 echo 'export PATH=$PATH:$HOME/.local/bin:' >> ~/.bashrc
 nvm install 20
-go get -u github.com/posener/complete/v2/gocomplete
-COMP_INSTALL=1 gocomplete
