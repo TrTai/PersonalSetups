@@ -31,7 +31,7 @@ if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
 fi
 sudo apt-get update
 VIRTUALIZATION=$(lscpu | grep Virtualization)
-APTINSTALLLIST="tmux python3 make gcc ripgrep unzip git xclip ubuntu-restricted-extras neovim remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev chromium-browser floorp microsoft-edge-stable google-chrome-stable nala python3-venv python3-pip python3-pynvim code kitty docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin distrobox ffmpeg gimp obs-studio audacity handbrake vlc wireshark tshark"
+APTINSTALLLIST="tmux fzf python3 make gcc ripgrep unzip git xclip ubuntu-restricted-extras neovim remmina remmina-plugin-rdp remmina-plugin-secret remmina-dev chromium-browser floorp microsoft-edge-stable google-chrome-stable nala python3-venv python3-pip python3-pynvim code kitty docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin distrobox ffmpeg gimp obs-studio audacity handbrake vlc wireshark tshark"
 if [[ $VIRTUALIZATION =~ "VT-x" ]] || [[ $VIRTUALIZATION =~ "AMD-V" ]]; then
 	APTINSTALLLIST+=" qemu-system quickemu virtualbox"
 	IFVIRTUALIZATION=true
