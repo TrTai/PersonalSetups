@@ -76,6 +76,8 @@ git clone https://github.com/TrTai/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 echo "run 'nvm install ##' to complete node install"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+flatpak install flathub md.obsidian.Obsidian com.jgraph.drawio.desktop -y
+curl -f https://zed.dev/install.sh | sh
+echo 'export PATH=$PATH:$HOME/.local/bin:' >> ~/.bashrc
+source ~/.bashrc
 nvm install 20
